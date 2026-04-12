@@ -4,10 +4,9 @@ import LiveDot from '../shared/LiveDot'
 import SectionLabel from '../shared/SectionLabel'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useFadeIn } from '../../hooks/useFadeIn'
-import { accent, semantic, statusColors, modelColors, categoryColors, tooltipStyle } from '../../tokens/colors'
+import { accent, semantic, statusColors, modelColors, tooltipStyle } from '../../tokens/colors'
 import pipeline from '../../data/pipeline'
 import agents from '../../data/agents'
-import mcpServers from '../../data/mcpServers'
 
 /* ── derived metrics (immutable) ── */
 
@@ -21,9 +20,6 @@ const appliedToday = pipeline.filter(
   (e) => e.dateApplied && new Date(e.dateApplied).getTime() >= oneDayAgo,
 )
 
-const totalAgentRuns = agents.reduce((sum, a) => sum + a.runsToday, 0)
-const totalMcpCalls = mcpServers.reduce((sum, s) => sum + s.callsToday, 0)
-
 const funnelData = FUNNEL_ORDER.map((status) => ({
   status,
   count: pipeline.filter((e) => e.status === status).length,
@@ -35,12 +31,6 @@ const tractionEntries = pipeline.filter(
 )
 
 /* ── tiny helpers ── */
-
-const MCP_STATUS_COLORS = {
-  connected: semantic.positive,
-  degraded: semantic.caution,
-  disconnected: semantic.negative,
-}
 
 function formatNumber(v) {
   return Math.round(v).toLocaleString()
@@ -57,17 +47,13 @@ function KpiScoreboard() {
   const activePipeline = useCountUp({ target: nonTerminal.length, format: formatNumber })
   const warmCount = useCountUp({ target: warmContacts.length, delay: 100, format: formatNumber })
   const appliedCount = useCountUp({ target: appliedToday.length, delay: 200, format: formatNumber })
-  const agentRuns = useCountUp({ target: totalAgentRuns, delay: 300, format: formatNumber })
-  const mcpCalls = useCountUp({ target: totalMcpCalls, delay: 400, format: formatNumber })
 
   return (
     <div ref={fade.ref} className={fade.className}>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <MetricCard label="Active Pipeline" value={activePipeline} sublabel="non-terminal entries" />
         <MetricCard label="Warm Contacts" value={warmCount} deltaPositive sublabel="warm + interviewing" />
         <MetricCard label="Applied Today" value={appliedCount} sublabel="last 24 hours" />
-        <MetricCard label="Agent Runs" value={agentRuns} sublabel="runs today" />
-        <MetricCard label="MCP Calls" value={mcpCalls} sublabel="calls today" />
       </div>
     </div>
   )
@@ -163,65 +149,6 @@ function AgentStatusGrid() {
   )
 }
 
-function McpServerCard({ server }) {
-  const dotColor = MCP_STATUS_COLORS[server.status] ?? '#AFADAD'
-  const catColor = categoryColors[server.category] ?? '#AFADAD'
-
-  return (
-    <div className="glass-card rounded-card p-4 flex flex-col gap-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span
-            className="inline-block rounded-full"
-            style={{
-              width: 8,
-              height: 8,
-              backgroundColor: dotColor,
-              boxShadow: `0 0 6px ${dotColor}60`,
-              flexShrink: 0,
-            }}
-          />
-          <span className="text-white font-semibold text-sm">{server.name}</span>
-        </div>
-        <span
-          className="px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider"
-          style={{ backgroundColor: `${catColor}26`, color: catColor }}
-        >
-          {server.category}
-        </span>
-      </div>
-
-      <div className="flex items-center gap-4 text-xs" style={{ color: '#AFADAD' }}>
-        <span>
-          Calls{' '}
-          <span className="text-white font-medium">{server.callsToday}</span>
-        </span>
-        <span>
-          Latency{' '}
-          <span className="text-white font-medium">
-            {server.avgLatency > 0 ? `${server.avgLatency}ms` : '--'}
-          </span>
-        </span>
-      </div>
-    </div>
-  )
-}
-
-function McpHealthGrid() {
-  const fade = useFadeIn()
-
-  return (
-    <div ref={fade.ref} className={fade.className}>
-      <SectionLabel>MCP Health</SectionLabel>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {mcpServers.map((server) => (
-          <McpServerCard key={server.id} server={server} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 function TractionAlertCard({ entry }) {
   const borderColor = entry.status === 'interviewing' || entry.status === 'offer'
     ? accent.emerald
@@ -280,7 +207,6 @@ export default function MissionControl() {
       <KpiScoreboard />
       <PipelineFunnel />
       <AgentStatusGrid />
-      <McpHealthGrid />
       <TractionAlerts />
     </div>
   )

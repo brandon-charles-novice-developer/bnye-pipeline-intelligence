@@ -97,7 +97,7 @@ function ScoringBreakdown() {
       <div className="glass-card rounded-card p-5">
         <SectionLabel>Scoring Criteria</SectionLabel>
         <div className="flex flex-col gap-3">
-          {sprintData.scoringCriteria.map((criterion) => {
+          {sprintData.scoringCriteria.slice(0, 5).map((criterion) => {
             const pct = (criterion.weight / maxWeight) * 100
             return (
               <div key={criterion.name} className="flex items-center gap-3">
@@ -155,7 +155,7 @@ function LearningEngine() {
             <span className="text-center">Adjustment</span>
             <span>Reason</span>
           </div>
-          {sprintData.learningEngine.recentAdjustments.map((adj) => {
+          {sprintData.learningEngine.recentAdjustments.slice(0, 3).map((adj) => {
             const increased = adj.newWeight > adj.oldWeight
             const arrow = increased ? '\u2191' : '\u2193'
             const color = increased ? semantic.positive : semantic.negative
