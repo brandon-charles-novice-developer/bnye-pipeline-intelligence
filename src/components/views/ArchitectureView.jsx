@@ -16,11 +16,11 @@ import { useFadeIn } from '../../hooks/useFadeIn'
 /* ── colour per architecture category ── */
 const CATEGORY_COLOR = {
   'data-source':   '#3B82F6',
-  'search':        '#10B981',
-  'knowledge':     '#C4B5FD',
-  'agent':         '#10B981',
-  'orchestrator':  '#F59E0B',
-  'output':        '#22C55E',
+  'search':        '#00FF88',
+  'knowledge':     '#22D3EE',
+  'agent':         '#00FF88',
+  'orchestrator':  '#FBBF24',
+  'output':        '#34D399',
 }
 
 const STATUS_DOT = {
@@ -58,11 +58,9 @@ function GlassNode({ data }) {
       style={{
         width: 178,
         background: glass.card,
-        backdropFilter: glass.blur,
-        WebkitBackdropFilter: glass.blur,
         border: `1px solid ${glass.cardBorder}`,
         borderLeft: `3px solid ${accent}`,
-        borderRadius: 10,
+        borderRadius: 6,
         padding: '10px 12px',
         cursor: 'pointer',
       }}
@@ -106,7 +104,7 @@ const nodeTypes = { custom: GlassNode }
 const defaultEdgeOptions = {
   style: { stroke: 'rgba(255,255,255,0.18)', strokeWidth: 1.5 },
   labelStyle: { fill: 'rgba(255,255,255,0.5)', fontSize: 9, fontWeight: 500 },
-  labelBgStyle: { fill: bg.base, fillOpacity: 0.85 },
+  labelBgStyle: { fill: '#0D0D12', fillOpacity: 0.9 },
   labelBgPadding: [6, 3],
   labelBgBorderRadius: 4,
 }
@@ -125,9 +123,7 @@ function DetailPanel({ node, onClose }) {
         right: 0,
         width: 300,
         height: '100%',
-        background: 'rgba(30,26,46,0.92)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background: 'rgba(13,13,18,0.95)',
         borderLeft: `1px solid ${glass.cardBorder}`,
         padding: '24px 20px',
         zIndex: 20,
@@ -257,10 +253,9 @@ export default function ArchitectureView() {
         <Controls
           showInteractive={false}
           style={{
-            background: 'rgba(30,26,46,0.8)',
+            background: 'rgba(13,13,18,0.9)',
             border: `1px solid ${glass.cardBorder}`,
-            borderRadius: 8,
-            backdropFilter: 'blur(12px)',
+            borderRadius: 6,
           }}
         />
       </ReactFlow>
