@@ -26,7 +26,7 @@ const CATEGORY_COLOR = {
 const STATUS_DOT = {
   running:      { color: '#22C55E', glow: 'rgba(34,197,94,0.6)',  pulse: true },
   connected:    { color: '#22C55E', glow: 'rgba(34,197,94,0.6)',  pulse: true },
-  idle:         { color: '#6B7280', glow: 'none',                  pulse: false },
+  idle:         { color: '#FFFFFF', glow: 'none',                  pulse: false },
   disconnected: { color: '#EF4444', glow: 'rgba(239,68,68,0.5)',  pulse: false },
   degraded:     { color: '#F59E0B', glow: 'rgba(245,158,11,0.5)', pulse: false },
 }
@@ -103,7 +103,7 @@ const nodeTypes = { custom: GlassNode }
 /* ── Default edge style ── */
 const defaultEdgeOptions = {
   style: { stroke: 'rgba(255,255,255,0.18)', strokeWidth: 1.5 },
-  labelStyle: { fill: 'rgba(255,255,255,0.5)', fontSize: 9, fontWeight: 500 },
+  labelStyle: { fill: 'rgba(255,255,255,1)', fontSize: 9, fontWeight: 500 },
   labelBgStyle: { fill: '#0D0D12', fillOpacity: 0.9 },
   labelBgPadding: [6, 3],
   labelBgBorderRadius: 4,
@@ -181,7 +181,7 @@ function DetailPanel({ node, onClose }) {
 
       {d.tools && d.tools.length > 0 && (
         <div>
-          <h4 style={{ color: 'rgba(255,255,255,0.6)', fontSize: 11, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tools</h4>
+          <h4 style={{ color: '#FFFFFF', fontSize: 11, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tools</h4>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
             {d.tools.map((t) => (
               <span
@@ -205,7 +205,7 @@ function DetailPanel({ node, onClose }) {
 
       {d.connections && d.connections.length > 0 && (
         <div>
-          <h4 style={{ color: 'rgba(255,255,255,0.6)', fontSize: 11, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Connections</h4>
+          <h4 style={{ color: '#FFFFFF', fontSize: 11, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Connections</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {d.connections.map((c) => (
               <span key={c} style={{ fontSize: 11, color: semantic.muted }}>

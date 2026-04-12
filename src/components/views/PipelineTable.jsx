@@ -143,7 +143,7 @@ export default function PipelineTable() {
                       cursor: 'pointer',
                       userSelect: 'none',
                       whiteSpace: 'nowrap',
-                      borderBottom: `1px solid ${glass.cardBorder}`,
+                      borderBottom: '1px solid rgba(0, 255, 136, 0.2)',
                       background: glass.headerBg,
                       position: 'sticky',
                       top: 0,

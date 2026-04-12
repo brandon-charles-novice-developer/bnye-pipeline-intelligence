@@ -51,7 +51,7 @@ body {
 /* ---- Glass header (solid, flat) ---- */
 .glass-header {
   background: rgba(13, 13, 18, 0.92);
-  border-bottom: 1px solid rgba(0, 255, 136, 0.12);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.15);
   border-radius: 0;
 }
 

@@ -2,7 +2,7 @@ const variants = {
   active:           { bg: 'rgba(34, 197, 94, 0.15)',  color: '#22C55E',  label: 'Active' },
   on_track:         { bg: 'rgba(34, 197, 94, 0.15)',  color: '#22C55E',  label: 'On Track' },
   positive:         { bg: 'rgba(34, 197, 94, 0.15)',  color: '#22C55E',  label: null },
-  paused:           { bg: 'rgba(175, 173, 173, 0.15)', color: '#AFADAD', label: 'Paused' },
+  paused:           { bg: 'rgba(175, 173, 173, 0.15)', color: '#FFFFFF', label: 'Paused' },
   underpacing:      { bg: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B',  label: 'Underpacing' },
   slight_overpace:  { bg: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B',  label: 'Overpacing' },
   caution:          { bg: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B',  label: null },

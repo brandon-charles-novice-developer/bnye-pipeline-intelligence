@@ -71,7 +71,7 @@ function CycleVisualization() {
                   boxShadow: isActive ? `0 0 20px ${brand.primary}30` : 'none',
                 }}
               >
-                <div className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: isActive ? brand.primary : '#AFADAD' }}>
+                <div className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: isActive ? brand.primary : '#FFFFFF' }}>
                   {phase.label}
                 </div>
                 <div className="text-xs text-white/70 leading-relaxed">
@@ -200,8 +200,8 @@ function SprintHistory() {
 
         <ResponsiveContainer width="100%" height={180}>
           <BarChart data={historyData} margin={{ left: 0, right: 0 }}>
-            <XAxis dataKey="label" tick={{ fill: '#AFADAD', fontSize: 11 }} axisLine={false} tickLine={false} />
-            <YAxis allowDecimals={false} tick={{ fill: '#AFADAD', fontSize: 11 }} axisLine={false} tickLine={false} width={30} />
+            <XAxis dataKey="label" tick={{ fill: '#FFFFFF', fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis allowDecimals={false} tick={{ fill: '#FFFFFF', fontSize: 11 }} axisLine={false} tickLine={false} width={30} />
             <Tooltip
               contentStyle={tooltipStyle}
               cursor={{ fill: 'rgba(255,255,255,0.04)' }}

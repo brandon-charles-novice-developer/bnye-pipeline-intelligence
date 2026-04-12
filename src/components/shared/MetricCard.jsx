@@ -11,7 +11,7 @@ export default function MetricCard({
       ? '#22C55E'
       : deltaPositive === false
       ? '#EF4444'
-      : '#AFADAD'
+      : '#FFFFFF'
 
   return (
     <div
@@ -19,7 +19,7 @@ export default function MetricCard({
     >
       <div
         className="text-[11px] uppercase tracking-widest font-semibold"
-        style={{ color: '#AFADAD' }}
+        style={{ color: '#FFFFFF' }}
       >
         {label}
       </div>
@@ -35,7 +35,7 @@ export default function MetricCard({
       )}
 
       {sublabel && (
-        <div className="text-xs mt-0.5" style={{ color: '#AFADAD' }}>
+        <div className="text-xs mt-0.5" style={{ color: '#FFFFFF' }}>
           {sublabel}
         </div>
       )}

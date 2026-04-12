@@ -13,7 +13,7 @@ export default {
           blue:    '#22D3EE',
           emerald: '#00FF88',
           lilac:   '#22D3EE',
-          muted:   '#6B7280',
+          muted:   '#FFFFFF',
         },
       },
       fontFamily: {

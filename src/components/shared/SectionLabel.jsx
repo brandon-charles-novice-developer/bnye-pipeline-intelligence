@@ -3,7 +3,7 @@ export default function SectionLabel({ children, right, className = '' }) {
     <div className={`flex items-center justify-between mb-4 ${className}`}>
       <span
         className="text-[11px] uppercase tracking-widest font-semibold"
-        style={{ color: '#AFADAD' }}
+        style={{ color: '#FFFFFF' }}
       >
         {children}
       </span>

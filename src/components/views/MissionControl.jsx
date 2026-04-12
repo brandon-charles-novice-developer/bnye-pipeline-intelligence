@@ -23,7 +23,7 @@ const appliedToday = pipeline.filter(
 const funnelData = FUNNEL_ORDER.map((status) => ({
   status,
   count: pipeline.filter((e) => e.status === status).length,
-  fill: statusColors[status]?.color ?? '#AFADAD',
+  fill: statusColors[status]?.color ?? '#FFFFFF',
 }))
 
 const tractionEntries = pipeline.filter(
@@ -68,11 +68,11 @@ function PipelineFunnel() {
         <SectionLabel>Pipeline Funnel</SectionLabel>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={funnelData} layout="vertical" margin={{ left: 20, right: 20 }}>
-            <XAxis type="number" allowDecimals={false} tick={{ fill: '#AFADAD', fontSize: 12 }} />
+            <XAxis type="number" allowDecimals={false} tick={{ fill: '#FFFFFF', fontSize: 12 }} />
             <YAxis
               type="category"
               dataKey="status"
-              tick={{ fill: '#AFADAD', fontSize: 12, textTransform: 'capitalize' }}
+              tick={{ fill: '#FFFFFF', fontSize: 12, textTransform: 'capitalize' }}
               width={100}
             />
             <Tooltip
@@ -89,7 +89,7 @@ function PipelineFunnel() {
 }
 
 function AgentCard({ agent }) {
-  const modelStyle = modelColors[agent.model] ?? { bg: 'rgba(175,173,173,0.15)', color: '#AFADAD' }
+  const modelStyle = modelColors[agent.model] ?? { bg: 'rgba(175,173,173,0.15)', color: '#FFFFFF' }
   const firstAction = agent.recentActions?.[0]
 
   return (
@@ -101,7 +101,7 @@ function AgentCard({ agent }) {
           ) : (
             <span
               className="inline-block rounded-full"
-              style={{ width: 8, height: 8, backgroundColor: '#AFADAD', flexShrink: 0 }}
+              style={{ width: 8, height: 8, backgroundColor: '#FFFFFF', flexShrink: 0 }}
             />
           )}
           <span className="text-white font-semibold text-sm">{agent.name}</span>
@@ -114,7 +114,7 @@ function AgentCard({ agent }) {
         </span>
       </div>
 
-      <div className="flex items-center gap-4 text-xs" style={{ color: '#AFADAD' }}>
+      <div className="flex items-center gap-4 text-xs" style={{ color: '#FFFFFF' }}>
         <span>
           Success{' '}
           <span className="text-white font-medium">{formatPct(agent.successRate * 100)}</span>
@@ -126,7 +126,7 @@ function AgentCard({ agent }) {
       </div>
 
       {firstAction && (
-        <p className="text-xs truncate mt-1" style={{ color: '#AFADAD' }}>
+        <p className="text-xs truncate mt-1" style={{ color: '#FFFFFF' }}>
           {firstAction.details}
         </p>
       )}
@@ -171,10 +171,10 @@ function TractionAlertCard({ entry }) {
           {entry.status}
         </span>
       </div>
-      <p className="text-xs mt-1" style={{ color: '#AFADAD' }}>
+      <p className="text-xs mt-1" style={{ color: '#FFFFFF' }}>
         {entry.role}
       </p>
-      <div className="flex items-center gap-4 text-xs mt-2" style={{ color: '#AFADAD' }}>
+      <div className="flex items-center gap-4 text-xs mt-2" style={{ color: '#FFFFFF' }}>
         {entry.contact && <span>Contact: <span className="text-white">{entry.contact}</span></span>}
         <span>{entry.daysSinceActivity === 0 ? 'Today' : `${entry.daysSinceActivity}d ago`}</span>
       </div>

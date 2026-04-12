@@ -22,7 +22,7 @@ export const semantic = {
   positive: '#22C55E',
   negative: '#EF4444',
   caution:  '#F59E0B',
-  muted:    '#6B7280',
+  muted:    '#FFFFFF',
   text:     '#FFFFFF',
 }
 
@@ -62,7 +62,7 @@ export const statusColors = {
   interviewing: { bg: 'rgba(16, 185, 129, 0.15)',  color: '#10B981' },
   offer:        { bg: 'rgba(34, 197, 94, 0.15)',   color: '#22C55E' },
   rejected:     { bg: 'rgba(239, 68, 68, 0.15)',   color: '#EF4444' },
-  watching:     { bg: 'rgba(175, 173, 173, 0.15)', color: '#AFADAD' },
+  watching:     { bg: 'rgba(175, 173, 173, 0.15)', color: '#FFFFFF' },
 }
 
 // Agent model colors
