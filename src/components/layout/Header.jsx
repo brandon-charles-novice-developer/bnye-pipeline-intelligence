@@ -3,9 +3,9 @@ import { brand, glass, semantic } from '../../tokens/colors'
 
 const navItems = [
   { to: '/',              label: 'Mission Control' },
+  { to: '/architecture',  label: 'Architecture' },
   { to: '/pipeline',      label: 'Pipeline' },
   { to: '/sprint',        label: 'Sprint' },
-  { to: '/architecture',  label: 'Architecture' },
 ]
 
 export default function Header() {
