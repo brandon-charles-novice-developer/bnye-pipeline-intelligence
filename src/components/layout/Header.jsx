@@ -11,7 +11,7 @@ const navItems = [
 export default function Header() {
   return (
     <header
-      className="sticky top-0 z-50 px-6 py-3 flex items-center justify-between"
+      className="sticky top-0 z-50 px-6 lg:px-8 2xl:px-12 py-3"
       style={{
         backgroundColor: glass.headerBg,
         backdropFilter: glass.blur,
@@ -19,36 +19,38 @@ export default function Header() {
         borderBottom: `1px solid ${glass.cardBorder}`,
       }}
     >
-      <div className="flex items-center gap-6">
-        <h1 className="text-base font-bold tracking-tight" style={{ color: brand.primary }}>
-          Pipeline Intelligence
-        </h1>
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <h1 className="text-base font-bold tracking-tight" style={{ color: brand.primary }}>
+            Pipeline Intelligence
+          </h1>
 
-        <nav className="flex items-center gap-1">
-          {navItems.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === '/'}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
-              style={({ isActive }) => ({
-                backgroundColor: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
-                color: isActive ? brand.primary : semantic.muted,
-              })}
-            >
-              {label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="flex items-center gap-1">
+            {navItems.map(({ to, label }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={to === '/'}
+                className="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+                  color: isActive ? brand.primary : semantic.muted,
+                })}
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+
+        <a
+          href="https://brandonnye.pro"
+          className="text-xs font-medium hover:underline"
+          style={{ color: semantic.muted }}
+        >
+          Command Center
+        </a>
       </div>
-
-      <a
-        href="https://brandonnye.pro"
-        className="text-xs font-medium hover:underline"
-        style={{ color: semantic.muted }}
-      >
-        Command Center
-      </a>
     </header>
   )
 }
