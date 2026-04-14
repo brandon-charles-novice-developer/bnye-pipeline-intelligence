@@ -1,0 +1,294 @@
+/* ================================================================
+   B.NYE PORTFOLIO — SHARED DESIGN SYSTEM
+   Synthesized from production reference scrapes (Phase 0)
+   Sources: Raycast, Linear, Vercel, Stripe, Apple
+   ================================================================
+
+   Usage: @import this file in any portfolio app's global CSS.
+   All values trace to a reference with adaptation rationale.
+   Existing fluid type (--step-*) and spacing (--space-*) scales
+   are defined in globals.css and carry forward unchanged.
+   ================================================================ */
+
+:root {
+
+  /* ============================================================
+     1. GLASS WEIGHTS — 3-tier system
+     ============================================================
+
+     Raycast's 4-layer box-shadow is the structural template:
+       Layer 1: inset top-edge highlight (glass refraction)
+       Layer 2: deep ambient shadow (depth)
+       Layer 3: colored accent glow (brand tint)
+       Layer 4: inset border ring (edge definition)
+
+     Linear's known glass values provide the backdrop-filter base:
+       backdrop-filter: blur(20px) saturate(180%)
+       background: rgba(0,0,0,0.5)
+       border: 1px solid rgba(255,255,255,0.08)
+
+     We scale blur, opacity, and shadow intensity across 3 weights.
+     ============================================================ */
+
+  /* --- Glass Light: subtle frosted hint, cards and surfaces --- */
+  /* Adapted from Linear — blur reduced from 20px to 12px for lighter feel.
+     Background opacity lowered from 0.5 to 0.3 so content beneath bleeds through. */
+  --glass-light-blur: blur(12px) saturate(160%);
+  --glass-light-bg: rgba(10, 10, 20, 0.30);
+  /* Adapted from Linear — border at 0.06 (below their 0.08) for subtlety */
+  --glass-light-border: 1px solid rgba(255, 255, 255, 0.06);
+  /* Adapted from Raycast — 2-layer simplified: top highlight + inset ring only.
+     Omits ambient shadow and accent glow for lightweight feel. */
+  --glass-light-shadow:
+    0px 1px 0px 0px rgba(255, 255, 255, 0.06) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+
+  /* --- Glass Medium: standard panels, nav, interactive surfaces --- */
+  /* Adapted from Linear — blur at their native 20px, saturate at 180%.
+     Background uses Raycast's deep navy tint rgba(7,9,33) instead of pure black,
+     shifted to our palette base (10,10,20) at 0.50 opacity. */
+  --glass-medium-blur: blur(20px) saturate(180%);
+  --glass-medium-bg: rgba(10, 10, 20, 0.50);
+  /* Adapted from Linear — border at their native 0.08 */
+  --glass-medium-border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Adapted from Raycast — full 4-layer formula.
+     Layer 2 (ambient) reduced from 50px spread to 40px for tighter depth.
+     Layer 3 uses our accent-primary blue instead of Raycast's varying accent.
+     Opacity on accent glow set to 0.06 (between Raycast's 0.05 and 0.10). */
+  --glass-medium-shadow:
+    0px 1px 0px 0px rgba(255, 255, 255, 0.08) inset,
+    0px 20px 40px 0px rgba(0, 0, 0, 0.30),
+    0px 0px 20px 3px rgba(61, 120, 255, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+
+  /* --- Glass Heavy: modals, overlays, hero sections --- */
+  /* Adapted from Linear — blur increased to 32px for deep frosted effect.
+     Saturate stays at 180%. Background opacity raised to 0.65 for
+     stronger text contrast on overlays. */
+  --glass-heavy-blur: blur(32px) saturate(180%);
+  --glass-heavy-bg: rgba(10, 10, 20, 0.65);
+  /* Border brightened to 0.10 for modal-level edge definition */
+  --glass-heavy-border: 1px solid rgba(255, 255, 255, 0.10);
+  /* Adapted from Raycast — full 4-layer with elevated values.
+     Layer 2 ambient shadow at Raycast's native 30px/50px spread.
+     Layer 3 accent glow at 0.10 (Raycast's upper range).
+     Deep shadow opacity at 0.40 (matches Raycast heavy cards). */
+  --glass-heavy-shadow:
+    0px 1px 0px 0px rgba(255, 255, 255, 0.10) inset,
+    0px 30px 50px 0px rgba(0, 0, 0, 0.40),
+    0px 0px 40px 20px rgba(61, 120, 255, 0.10),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+
+  /* --- Glass interactive states --- */
+  /* Border hover adapted from current system — raised from 0.08 to 0.16 */
+  --glass-border-hover: rgba(255, 255, 255, 0.16);
+  /* Adapted from Raycast — top-edge highlight for ::before pseudo-element */
+  --glass-highlight-gradient: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.10),
+    transparent
+  );
+
+
+  /* ============================================================
+     2. MOTION LANGUAGE
+     ============================================================
+
+     Easing: Vercel's production curve + existing premium curves.
+     Timing: Raycast's 250ms base + Linear's 160ms for micro-interactions.
+     Stagger: 80ms base (current system, proven rhythm).
+     ============================================================ */
+
+  /* --- Easing curves --- */
+  /* Existing — kept as-is, these are battle-tested */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.65, 0.01, 0.05, 0.99);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-snap: cubic-bezier(0.85, 0, 0.15, 1);
+  /* Adapted from Vercel — their primary transition curve.
+     Slow ease-in (0.33, 0.12) with sharp deceleration (0.15, 1.00).
+     Good for opacity fades, position shifts, scale transforms. */
+  --ease-vercel: cubic-bezier(0.33, 0.12, 0.15, 1.00);
+  /* Adapted from Linear — ease-out-quad referenced in their transitions.
+     Standard quadratic ease-out for snappy micro-interactions. */
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* --- Duration scale --- */
+  /* Adapted from Linear (160ms) — micro-interactions: hover, focus, toggle */
+  --duration-instant: 100ms;
+  --duration-fast: 160ms;
+  /* Adapted from Raycast (250ms) — standard UI transitions */
+  --duration-normal: 250ms;
+  /* Adapted from Vercel (400ms in opacity transition) — content reveals */
+  --duration-slow: 400ms;
+  /* Existing system — hero/page-level animations */
+  --duration-slower: 800ms;
+  --duration-slowest: 1200ms;
+
+  /* --- Stagger timing --- */
+  /* Existing system — 80ms per child, proven cascade rhythm */
+  --stagger-base: 80ms;
+  /* Tighter stagger for dense grids (e.g., bento tiles) */
+  --stagger-tight: 50ms;
+  /* Wider stagger for hero sequences (e.g., progressive boot) */
+  --stagger-wide: 120ms;
+
+  /* --- Transition presets --- */
+  /* Composable: apply via transition shorthand */
+  --transition-glass: border-color var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  --transition-micro: all var(--duration-fast) var(--ease-out-quad);
+  --transition-reveal: opacity var(--duration-slower) var(--ease-vercel),
+    transform var(--duration-slower) var(--ease-vercel);
+
+
+  /* ============================================================
+     3. TYPOGRAPHY PAIRING
+     ============================================================
+
+     Evaluation: Inter is clean but generic — the #1 AI-generated-
+     looking font per web-designer-standards.md. For a portfolio
+     that must NOT look AI-generated, we need personality.
+
+     Decision: Geist Sans (display/headings) + Inter (body).
+
+     Rationale:
+     - Geist is Vercel's house font — already loaded via next/font
+       in the hub (--font-geist-mono is in globals.css @theme).
+       Geist Sans has tighter letter-spacing and more geometric
+       character than Inter at display sizes.
+     - Inter stays for body text — proven readability, wide weight
+       range, excellent on glass surfaces.
+     - This pairing keeps the dependency count at zero (both fonts
+       already available in the Next.js project).
+     - If Geist Sans is unavailable in a Vite app, falls back to
+       system-ui which has similar geometric character.
+
+     Alternative considered: Outfit, Sora, Cabinet Grotesk (from
+     metaprompt). All require additional font loading. Geist wins
+     on zero-cost adoption since it's already in the stack.
+     ============================================================ */
+
+  /* Display font — headings, hero text, navigation brand */
+  /* Adapted from Vercel — they use Geist across their entire product.
+     We use it selectively for display to create contrast with body. */
+  --font-display: var(--font-geist-sans, 'Geist Sans', system-ui, sans-serif);
+
+  /* Body font — paragraphs, labels, secondary text */
+  /* Existing — Inter stays for body. Battle-tested readability. */
+  --font-body: var(--font-inter, 'Inter', system-ui, sans-serif);
+
+  /* Mono font — code blocks, technical labels, data values */
+  /* Existing — Geist Mono already in the stack */
+  --font-mono: var(--font-geist-mono, 'Geist Mono', 'SF Mono', monospace);
+
+  /* --- Display type treatments --- */
+  /* Tighter letter-spacing at display sizes (Vercel pattern).
+     At 3rem+, default letter-spacing looks loose. */
+  --tracking-display: -0.025em;
+  --tracking-heading: -0.015em;
+  --tracking-body: 0em;
+  /* Adapted from Vercel — mono text gets slightly wider spacing */
+  --tracking-mono: 0.02em;
+
+  /* --- Font weight emphasis scale --- */
+  /* Aggressive weight contrast creates hierarchy without boxes/borders
+     (per web-designer-standards.md: "Typography IS the Design") */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+
+  /* ============================================================
+     4. COLOR REFINEMENT
+     ============================================================
+
+     Base: Current #0A0A14 vs Raycast's rgba(7,9,33,0.70).
+     Raycast's navy has more blue saturation (hue ~240 vs our ~240
+     but at higher chroma). Our #0A0A14 = rgb(10,10,20) — already
+     close but slightly more neutral.
+
+     Decision: Keep #0A0A14 as primary bg. It's dark enough for
+     contrast and neutral enough for glass surfaces. Add Raycast-
+     influenced deeper variant for layered depth.
+
+     OKLCH accents: Vercel uses oklch(62.72% 0.2247 249.81) — a
+     vivid blue. We adopt OKLCH for accent tints that stay
+     perceptually uniform across the spectrum.
+     ============================================================ */
+
+  /* --- Background depth scale --- */
+  /* Existing — primary through glass unchanged */
+  --color-bg-void: #06060E;
+  /* New — deeper than primary for true-black sections.
+     Adapted from Raycast's rgba(7,9,33) mapped to solid hex. */
+  --color-bg-primary: #0A0A14;
+  --color-bg-secondary: #0F0F1F;
+  --color-bg-tertiary: #141429;
+  --color-bg-glass: #1A1A2E;
+  /* New — elevated surface for cards sitting on glass */
+  --color-bg-elevated: #1E1E38;
+
+  /* --- Accent palette with OKLCH tints --- */
+  /* Primary blue — existing hex preserved, OKLCH equivalent added
+     for use in color-mix() and gradient stops.
+     Adapted from Vercel — oklch(62.72% 0.2247 249.81) is their blue.
+     Ours is slightly less chromatic to sit better on dark glass. */
+  --accent-primary: #3D78FF;
+  --accent-primary-oklch: oklch(58% 0.20 260);
+  /* Tint variants via OKLCH lightness shifts — perceptually uniform.
+     These replace hardcoded rgba overlays for hover/active states. */
+  --accent-primary-subtle: oklch(58% 0.20 260 / 0.12);
+  --accent-primary-muted: oklch(58% 0.20 260 / 0.06);
+
+  /* Existing accent colors preserved */
+  --accent-cyan: #5CD7EB;
+  --accent-purple: #9464FF;
+  --accent-teal: #22D4BF;
+  --accent-warning: #FFB83D;
+  --accent-error: #FF5454;
+
+  /* --- Text hierarchy --- */
+  /* Existing — unchanged */
+  --text-primary: #F5F5FA;
+  --text-secondary: #AEAEC2;
+  --text-tertiary: #73738F;
+  /* New — quaternary for decorative/disabled text.
+     Adapted from Linear's --color-text-quaternary concept. */
+  --text-quaternary: #4A4A66;
+
+  /* --- Gradient presets --- */
+  /* Primary brand gradient */
+  --gradient-brand: linear-gradient(135deg, var(--accent-primary), var(--accent-purple));
+  /* Text gradient for hero headlines */
+  --gradient-text: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  /* Subtle radial glow for section backgrounds.
+     Adapted from Raycast — their cards use colored ambient glow.
+     We apply the same concept at section scale. */
+  --gradient-glow: radial-gradient(
+    ellipse at 50% 0%,
+    oklch(58% 0.20 260 / 0.08) 0%,
+    transparent 70%
+  );
+}
+
+/* ================================================================
+   Reduced motion: collapse all motion to instant
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0ms;
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-slower: 0ms;
+    --duration-slowest: 0ms;
+    --stagger-base: 0ms;
+    --stagger-tight: 0ms;
+    --stagger-wide: 0ms;
+  }
+}
