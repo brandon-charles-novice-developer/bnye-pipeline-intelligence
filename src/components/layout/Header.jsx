@@ -43,7 +43,7 @@ export default function Header() {
       </div>
 
       <a
-        href="https://bnye-command-center.vercel.app"
+        href="https://brandonnye.pro"
         className="text-xs font-medium hover:underline"
         style={{ color: semantic.muted }}
       >

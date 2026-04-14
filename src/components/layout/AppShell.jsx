@@ -6,6 +6,12 @@ export default function AppShell({ children }) {
     <div className="min-h-screen flex flex-col relative">
       <GradientMesh />
       <Header />
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-4 pb-2">
+        <p className="text-xs leading-relaxed max-w-3xl" style={{ color: 'var(--text-secondary)' }}>
+          <span style={{ color: 'var(--text-tertiary)' }}>Why I built this — </span>
+          An enterprise-scale workflow required coordinating 12 data sources, 4 AI models, and 6 output systems with zero manual handoffs. I built an event-driven platform where 5 microservices and 4 specialized agents dispatch in parallel.
+        </p>
+      </div>
       <main
         className="flex-1 overflow-auto relative"
         style={{ zIndex: 1 }}
